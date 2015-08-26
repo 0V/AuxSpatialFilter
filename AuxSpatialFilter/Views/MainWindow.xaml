@@ -139,8 +139,7 @@
                 <TextBox Text="{Binding KernelSource[6][6]}"/>
             </StackPanel>
         </StackPanel>
-        <Border Grid.Column="1" Margin="4" BorderBrush="Black" BorderThickness="1">
-            <StackPanel>
+        <StackPanel Grid.Column="1" Margin="4" >
                 <TextBlock Margin="10,0,0,0" Text="画像名" FontSize="14"/>
                 <ListBox Name="FileList" Height="120" Margin="4" ItemsSource="{Binding FileUris}" Grid.Column="1"/>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -164,6 +163,5 @@
                     <Button Content="処理を開始" Height="30" Margin="4" Width="100" Command="{Binding ExcuteCommand}"></Button>
                 </StackPanel>
             </StackPanel>
-        </Border>
     </Grid>
 </Window>
