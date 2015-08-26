@@ -1,0 +1,169 @@
+﻿<Window x:Class="AuxSpatialFilter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:AuxSpatialFilter.Views"
+        xmlns:vm="clr-namespace:AuxSpatialFilter.ViewModels"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+
+        <!--Viewに特別な要件が存在しない限りは、トリガーやアクションの自作にこだわらず積極的にコードビハインドを使いましょう -->
+        <!--Viewのコードビハインドは、基本的にView内で完結するロジックとViewModelからのイベントの受信(専用リスナを使用する)に限るとトラブルが少なくなります -->
+        <!--Livet1.1からはコードビハインドでViewModelのイベントを受信するためのWeakEventLisnterサポートが追加されています -->
+
+        <!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="ContentRendered">
+            <l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/>
+        </i:EventTrigger>
+
+        <!--Windowが閉じたタイミングでViewModelのDisposeメソッドが呼ばれます-->
+        <i:EventTrigger EventName="Closed">
+            <l:DataContextDisposeAction/>
+        </i:EventTrigger>
+
+        <l:InteractionMessageTrigger Messenger="{Binding Messenger}" MessageKey="ImageWindow">
+            <!-- Window を表示するメッセージアクション 
+                 Window を非表示にしてもメッセージを送信できるようにするには InvokeActionOnlyWhenWindowIsActive="False" が必要 -->
+            <l:TransitionInteractionMessageAction WindowType="{x:Type v:ImageWindow}" Mode="Normal"/>
+        </l:InteractionMessageTrigger>
+
+        <!--WindowのCloseキャンセル処理に対応する場合は、WindowCloseCancelBehaviorの使用を検討してください-->
+
+    </i:Interaction.Triggers>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Height" Value="20"></Setter>
+                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="Width" Value="20"></Setter>
+                    <Setter Property="TextAlignment" Value="Center"></Setter>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Height" Value="20"></Setter>
+                    <Setter Property="Margin" Value="5"></Setter>
+                    <Setter Property="Width" Value="20"></Setter>
+                </Style>
+
+            </StackPanel.Resources>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text=""/>
+                <TextBlock Text="7"/>
+                <TextBlock Text="5"/>
+                <TextBlock Text="3"/>
+                <TextBlock Text="1"/>
+                <TextBlock Text="3"/>
+                <TextBlock Text="5"/>
+                <TextBlock Text="7"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="7"/>
+                <TextBox Text="{Binding KernelSource[0][0]}"/>
+                <TextBox Text="{Binding KernelSource[0][1]}"/>
+                <TextBox Text="{Binding KernelSource[0][2]}"/>
+                <TextBox Text="{Binding KernelSource[0][3]}"/>
+                <TextBox Text="{Binding KernelSource[0][4]}"/>
+                <TextBox Text="{Binding KernelSource[0][5]}"/>
+                <TextBox Text="{Binding KernelSource[0][6]}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="5"/>
+                <TextBox Text="{Binding KernelSource[1][0]}"/>
+                <TextBox Text="{Binding KernelSource[1][1]}"/>
+                <TextBox Text="{Binding KernelSource[1][2]}"/>
+                <TextBox Text="{Binding KernelSource[1][3]}"/>
+                <TextBox Text="{Binding KernelSource[1][4]}"/>
+                <TextBox Text="{Binding KernelSource[1][5]}"/>
+                <TextBox Text="{Binding KernelSource[1][6]}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="3"/>
+                <TextBox Text="{Binding KernelSource[2][0]}"/>
+                <TextBox Text="{Binding KernelSource[2][1]}"/>
+                <TextBox Text="{Binding KernelSource[2][2]}"/>
+                <TextBox Text="{Binding KernelSource[2][3]}"/>
+                <TextBox Text="{Binding KernelSource[2][4]}"/>
+                <TextBox Text="{Binding KernelSource[2][5]}"/>
+                <TextBox Text="{Binding KernelSource[2][6]}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="1"/>
+                <TextBox Text="{Binding KernelSource[3][0]}"/>
+                <TextBox Text="{Binding KernelSource[3][1]}"/>
+                <TextBox Text="{Binding KernelSource[3][2]}"/>
+                <TextBox Text="{Binding KernelSource[3][3]}"/>
+                <TextBox Text="{Binding KernelSource[3][4]}"/>
+                <TextBox Text="{Binding KernelSource[3][5]}"/>
+                <TextBox Text="{Binding KernelSource[3][6]}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="3"/>
+                <TextBox Text="{Binding KernelSource[4][0]}"/>
+                <TextBox Text="{Binding KernelSource[4][1]}"/>
+                <TextBox Text="{Binding KernelSource[4][2]}"/>
+                <TextBox Text="{Binding KernelSource[4][3]}"/>
+                <TextBox Text="{Binding KernelSource[4][4]}"/>
+                <TextBox Text="{Binding KernelSource[4][5]}"/>
+                <TextBox Text="{Binding KernelSource[4][6]}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="5"/>
+                <TextBox Text="{Binding KernelSource[5][0]}"/>
+                <TextBox Text="{Binding KernelSource[5][1]}"/>
+                <TextBox Text="{Binding KernelSource[5][2]}"/>
+                <TextBox Text="{Binding KernelSource[5][3]}"/>
+                <TextBox Text="{Binding KernelSource[5][4]}"/>
+                <TextBox Text="{Binding KernelSource[5][5]}"/>
+                <TextBox Text="{Binding KernelSource[5][6]}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="7"/>
+                <TextBox Text="{Binding KernelSource[6][0]}"/>
+                <TextBox Text="{Binding KernelSource[6][1]}"/>
+                <TextBox Text="{Binding KernelSource[6][2]}"/>
+                <TextBox Text="{Binding KernelSource[6][3]}"/>
+                <TextBox Text="{Binding KernelSource[6][4]}"/>
+                <TextBox Text="{Binding KernelSource[6][5]}"/>
+                <TextBox Text="{Binding KernelSource[6][6]}"/>
+            </StackPanel>
+        </StackPanel>
+        <Border Grid.Column="1" Margin="4" BorderBrush="Black" BorderThickness="1">
+            <StackPanel>
+                <TextBlock Margin="10,0,0,0" Text="画像名" FontSize="14"/>
+                <ListBox Name="FileList" Height="120" Margin="4" ItemsSource="{Binding FileUris}" Grid.Column="1"/>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Content="開く" Height="30" Margin="4" Width="50">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <l:OpenFileDialogInteractionMessageAction>
+                                    <l:DirectInteractionMessage CallbackMethodTarget="{Binding}" CallbackMethodName="OpenFile">
+                                        <l:OpeningFileSelectionMessage Filter="画像(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp|すべてのファイル(*.*)|*.*" Title="ファイルを開く" MultiSelect="True"/>
+                                    </l:DirectInteractionMessage>
+                                </l:OpenFileDialogInteractionMessageAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Content="削除" Height="30" Margin="4" Width="50" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=FileList, Path=SelectedIndex}"></Button>
+                </StackPanel>
+                <StackPanel Margin="30,10">
+                    <RadioButton GroupName="size" Margin="4" Content="3x3" IsChecked="{Binding RadioChecks[0]}"/>
+                    <RadioButton GroupName="size" Margin="4" Content="5x5" IsChecked="{Binding RadioChecks[1]}"/>
+                    <RadioButton GroupName="size" Margin="4" Content="7x7" IsChecked="{Binding RadioChecks[2]}"/>
+                    <Button Content="処理を開始" Height="30" Margin="4" Width="100" Command="{Binding ExcuteCommand}"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
