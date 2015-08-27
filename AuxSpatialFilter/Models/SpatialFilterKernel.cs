@@ -56,7 +56,7 @@ namespace AuxSpatialFilter.Models
 
             var mat = new MatOfDouble(KernelSize, KernelSize,Values);
             
-            Cv2.Normalize(mat, mat);
+            Cv2.Normalize(mat, mat,1,0,OpenCvSharp.NormType.L1);
             return mat;
         }
 
