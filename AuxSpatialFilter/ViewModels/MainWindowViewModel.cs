@@ -245,7 +245,7 @@ namespace AuxSpatialFilter.ViewModels
 
         public void Delete(int parameter)
         {
-            if (FileUris.Count <= parameter) return;
+            if (FileUris.Count <= parameter || parameter < 0) return;
 
             FileUris.RemoveAt(parameter);
         }

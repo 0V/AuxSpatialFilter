@@ -148,7 +148,7 @@
                             <i:EventTrigger EventName="Click">
                                 <l:OpenFileDialogInteractionMessageAction>
                                     <l:DirectInteractionMessage CallbackMethodTarget="{Binding}" CallbackMethodName="OpenFile">
-                                        <l:OpeningFileSelectionMessage Filter="画像(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp|すべてのファイル(*.*)|*.*" Title="ファイルを開く" MultiSelect="True"/>
+                                    <l:OpeningFileSelectionMessage Filter="画像(*.jpg; *.jpeg; *.png; *.gif; *.bmp)|*.jpg; *.jpeg; *.png; *.gif; *.bmp|すべてのファイル(*.*)|*.*" Title="ファイルを開く" MultiSelect="True"/>
                                     </l:DirectInteractionMessage>
                                 </l:OpenFileDialogInteractionMessageAction>
                             </i:EventTrigger>

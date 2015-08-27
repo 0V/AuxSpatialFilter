@@ -16,8 +16,8 @@ namespace AuxSpatialFilter.Models
         {
 
         }
-        
-        public SpatialFilterKernel(double[] kernel,int kernelSize)
+
+        public SpatialFilterKernel(double[] kernel, int kernelSize)
         {
             Values = kernel;
             KernelSize = kernelSize;
@@ -25,7 +25,7 @@ namespace AuxSpatialFilter.Models
 
         public SpatialFilterKernel(double[][] kernel, int kernelSize)
         {
-            Values = GetKernel(kernel,kernelSize);
+            Values = GetKernel(kernel, kernelSize);
             KernelSize = kernelSize;
         }
 
@@ -49,16 +49,14 @@ namespace AuxSpatialFilter.Models
         public double[] Values { get; set; }
         public Mat GetMat()
         {
-            if (KernelSize * KernelSize > Values.Count())
+            if (KernelSize * KernelSize != Values.Count())
             {
-                throw new InvalidOperationException("you must fulfill KernelSize^2 <= Values.Count");
+                throw new InvalidOperationException("you must fulfill KernelSize^2 == Values.Count");
             }
 
-            var mat = new MatOfDouble();
-            for (int i = 0; i < KernelSize * KernelSize; i++)
-            {
-                mat.Add(Values[i]);
-            }
+            var mat = new MatOfDouble(KernelSize, KernelSize,Values);
+            
+            Cv2.Normalize(mat, mat);
             return mat;
         }
 

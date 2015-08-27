@@ -177,7 +177,7 @@ namespace AuxSpatialFilter.ViewModels
 
         public void SaveSourceImage()
         {
-
+            Images.SaveSource(SourceFileName);
         }
         #endregion
 
@@ -207,7 +207,7 @@ namespace AuxSpatialFilter.ViewModels
 
         public void SaveResultImage()
         {
-
+            Images.SaveResult(ResultFileName);
         }
         #endregion
 
