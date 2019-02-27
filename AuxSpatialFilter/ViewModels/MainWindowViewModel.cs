@@ -115,7 +115,23 @@ namespace AuxSpatialFilter.ViewModels
         {
             return (RadioCheckIndex() + 1) * 2 + 1;
         }
+        
+        #region IsNormalized変更通知プロパティ
+        private bool _IsNormalized = false;
 
+        public bool IsNormalized
+        {
+            get
+            { return _IsNormalized; }
+            set
+            {
+                if (_IsNormalized == value)
+                    return;
+                _IsNormalized = value;
+                RaisePropertyChanged("IsNormalized");
+            }
+        }
+        #endregion
 
         #region FileNames変更通知プロパティ
         private ObservableSynchronizedCollection<string> _FileNames;
@@ -133,7 +149,6 @@ namespace AuxSpatialFilter.ViewModels
             }
         }
         #endregion
-
 
         #region Kernel変更通知プロパティ
         private double[][] _Kernel;
@@ -183,6 +198,7 @@ namespace AuxSpatialFilter.ViewModels
                     int size = GetKernelSize();
 
                     var kernel = new SpatialFilterKernel(SourceToKernel(), size);
+                    kernel.IsNormalized = _IsNormalized;
                     var images = ImageManager.Filter(FileUris[0], kernel);
                     images.Freeze();
                     var viewmodel = new ImageWindowViewModel(images);

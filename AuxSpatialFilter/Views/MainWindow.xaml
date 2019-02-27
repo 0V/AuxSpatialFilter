@@ -6,7 +6,7 @@
         xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
         xmlns:v="clr-namespace:AuxSpatialFilter.Views"
         xmlns:vm="clr-namespace:AuxSpatialFilter.ViewModels"
-        Title="Aux-SpatialFilter" Height="350" Width="525">
+        Title="Aux-SpatialFilter" Height="400" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -40,7 +40,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="480"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -54,7 +54,7 @@
                 <Style TargetType="TextBox">
                     <Setter Property="Height" Value="20"></Setter>
                     <Setter Property="Margin" Value="5"></Setter>
-                    <Setter Property="Width" Value="20"></Setter>
+                    <Setter Property="Width" Value="50"></Setter>
                 </Style>
 
             </StackPanel.Resources>
@@ -140,28 +140,29 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="4" >
-                <TextBlock Margin="10,0,0,0" Text="画像名" FontSize="14"/>
-                <ListBox Name="FileList" Height="120" Margin="4" ItemsSource="{Binding FileUris}" Grid.Column="1"/>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button Content="開く" Height="30" Margin="4" Width="50">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <l:OpenFileDialogInteractionMessageAction>
-                                    <l:DirectInteractionMessage CallbackMethodTarget="{Binding}" CallbackMethodName="OpenFile">
-                                    <l:OpeningFileSelectionMessage Filter="画像(*.jpg; *.jpeg; *.png; *.gif; *.bmp)|*.jpg; *.jpeg; *.png; *.gif; *.bmp|すべてのファイル(*.*)|*.*" Title="ファイルを開く" MultiSelect="True"/>
-                                    </l:DirectInteractionMessage>
-                                </l:OpenFileDialogInteractionMessageAction>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button Content="削除" Height="30" Margin="4" Width="50" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=FileList, Path=SelectedIndex}"></Button>
-                </StackPanel>
-                <StackPanel Margin="30,10">
-                    <RadioButton GroupName="size" Margin="4" Content="3x3" IsChecked="{Binding RadioChecks[0]}"/>
-                    <RadioButton GroupName="size" Margin="4" Content="5x5" IsChecked="{Binding RadioChecks[1]}"/>
-                    <RadioButton GroupName="size" Margin="4" Content="7x7" IsChecked="{Binding RadioChecks[2]}"/>
-                    <Button Content="処理を開始" Height="30" Margin="4" Width="100" Command="{Binding ExcuteCommand}"></Button>
-                </StackPanel>
+            <TextBlock Margin="10,0,0,0" Text="Image List" FontSize="14"/>
+            <ListBox Name="FileList" Height="100" Margin="4" ItemsSource="{Binding FileUris}" Grid.Column="1"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="Open" Height="30" Margin="4" Width="50">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <l:OpenFileDialogInteractionMessageAction>
+                                <l:DirectInteractionMessage CallbackMethodTarget="{Binding}" CallbackMethodName="OpenFile">
+                                    <l:OpeningFileSelectionMessage Filter="Image(*.jpg; *.jpeg; *.png; *.gif; *.bmp)|*.jpg; *.jpeg; *.png; *.bmp|All Files(*.*)|*.*" Title="Open File" MultiSelect="True"/>
+                                </l:DirectInteractionMessage>
+                            </l:OpenFileDialogInteractionMessageAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="Remove" Height="30" Margin="4" Width="50" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=FileList, Path=SelectedIndex}"></Button>
             </StackPanel>
+            <StackPanel Margin="30,10">
+                <CheckBox Margin="4,8" Content="Kernel Normalization" IsChecked="{Binding IsNormalized}"/>
+                <RadioButton GroupName="size" Margin="4" Content="3x3" IsChecked="{Binding RadioChecks[0]}"/>
+                <RadioButton GroupName="size" Margin="4" Content="5x5" IsChecked="{Binding RadioChecks[1]}"/>
+                <RadioButton GroupName="size" Margin="4" Content="7x7" IsChecked="{Binding RadioChecks[2]}"/>
+                <Button Content="Excute" Height="30" Margin="4" Width="100" Command="{Binding ExcuteCommand}"></Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

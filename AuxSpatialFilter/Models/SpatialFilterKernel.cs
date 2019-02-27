@@ -47,6 +47,8 @@ namespace AuxSpatialFilter.Models
 
         public int KernelSize { get; set; }
         public double[] Values { get; set; }
+        public bool IsNormalized { get; set; }
+
         public Mat GetMat()
         {
             if (KernelSize * KernelSize != Values.Count())
@@ -55,8 +57,11 @@ namespace AuxSpatialFilter.Models
             }
 
             var mat = new MatOfDouble(KernelSize, KernelSize,Values);
-            
-            Cv2.Normalize(mat, mat,1,0,OpenCvSharp.NormType.L1);
+
+            if (IsNormalized)
+            {
+                Cv2.Normalize(mat, mat, 1, 0, OpenCvSharp.NormType.L1);
+            }
             return mat;
         }
 
